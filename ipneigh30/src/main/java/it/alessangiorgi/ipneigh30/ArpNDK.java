@@ -1,48 +1,48 @@
 package it.alessangiorgi.ipneigh30;
 
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 
 public class ArpNDK {
 
     private static final String TAG = "ArpNDK";
+    private static final String ARPNDK_FAILED = "Arp failed";
 
     static {
         System.loadLibrary("ipneigh-android");
     }
-    public static native String ARPFromJNI();
 
-    private static String ipNeighborMac(String host) {
+    private static native int ARPFromJNI(int fd);
+
+    public static String getARP() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(ARPFromJNI());
         try {
+            ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
+            ParcelFileDescriptor readSidePfd = pipe[0];
+            ParcelFileDescriptor writeSidePfd = pipe[1];
+            ParcelFileDescriptor.AutoCloseInputStream inputStream = new ParcelFileDescriptor.AutoCloseInputStream(readSidePfd);
+            int fd_write = writeSidePfd.detachFd();
+            int returnCode = ARPFromJNI(fd_write);
 
-            Reader inputString = new StringReader(stringBuilder.toString());
+            if(returnCode != 0)
+                return ARPNDK_FAILED;
 
-            BufferedReader bufferedReader = new BufferedReader(inputString);
-
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                Log.e(TAG, line);
-
-                /*if (line.endsWith("FAILED") || line.endsWith("INCOMPLETE")) continue;
-                if (line.contains("::")) continue;*/
-                String ipLine = line.split(" ")[0];
-
-                if (ipLine.equals(host)) {
-                    String[] macLine = line.split(" ");
-                    String mac = macLine[macLine.length - 2];
-                    return mac;
-                }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                Log.e(TAG, "getARP: "+line );
+                stringBuilder.append(line).append("\n");
             }
-
-        } catch (IOException ignore) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
+        return stringBuilder.toString();
     }
 
 }

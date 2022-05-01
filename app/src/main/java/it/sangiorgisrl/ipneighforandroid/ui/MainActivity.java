@@ -17,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         arptable_res = findViewById(R.id.arptable);
 
-        arptable_res.setText(ArpNDK.ARPFromJNI());
+        arptable_res.setText(ArpNDK.getARP());
     }
 }
