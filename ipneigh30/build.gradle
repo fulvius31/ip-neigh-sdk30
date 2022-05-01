@@ -57,7 +57,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.fulvius31'
                 artifactId = 'ipneigh30'
-                version = '0.0.1'
+                version = '0.0.2'
             }
         }
     }
