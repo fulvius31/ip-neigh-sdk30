@@ -282,6 +282,31 @@ jstring JNICALL Java_it_alessangiorgi_ipneigh30_ArpNDK_ARPFromJNI(JNIEnv *env, j
                     (*env)->CallObjectMethod(env, stringBuilder, mid_StringBuilder_append,
                                              arp_entry);
                     break;
+                case NUD_PROBE:
+                    __android_log_print(ANDROID_LOG_ERROR, LOGTAG,
+                                        "%s dev %s lladdr %02x:%02x:%02x:%02x:%02x:%02x PROBE\n",
+                                        destination_address, ifname, mac_buf[4], mac_buf[5],
+                                        mac_buf[6],
+                                        mac_buf[7], mac_buf[8], mac_buf[9]);
+                    snprintf(arp_result, 1024,
+                             "%s dev %s lladdr %02x:%02x:%02x:%02x:%02x:%02x PROBE\n",
+                             destination_address, ifname, mac_buf[4], mac_buf[5], mac_buf[6],
+                             mac_buf[7], mac_buf[8], mac_buf[9]);
+                    arp_entry = (*env)->NewStringUTF(env, arp_result);
+                    (*env)->CallObjectMethod(env, stringBuilder, mid_StringBuilder_append,
+                                             arp_entry);
+                    break;
+                case NUD_FAILED:
+                    __android_log_print(ANDROID_LOG_ERROR, LOGTAG,
+                                        "%s dev %s lladdr FAILED\n",
+                                        destination_address, ifname);
+                    snprintf(arp_result, 1024,
+                             "%s dev %s lladdr FAILED\n",
+                             destination_address, ifname);
+                    arp_entry = (*env)->NewStringUTF(env, arp_result);
+                    (*env)->CallObjectMethod(env, stringBuilder, mid_StringBuilder_append,
+                                             arp_entry);
+                    break;
                 default:
                     break;
             }
