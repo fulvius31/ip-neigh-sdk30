@@ -7,7 +7,7 @@
 ---
 # What this library does?
 
-This library is born because Google has removed the possibility to use command like `ip neigh` for all the apps with targetSDK '30'.
+This library is born because Google has removed the possibility to use command like `ip neigh` for all the apps with targetSDK `30`.
 
 More precisely apps cannot bind netlink socket when targeting Android API 30, then apps cannot retreive Arp table anymore.
 
@@ -36,3 +36,7 @@ import it.alessangiorgi.ipneigh30.ArpNDK;
 
 String arpTable = ArpNDK.getARP();
 ```
+
+# Important Note
+
+This library does not work - at the moment - if your `targetSdk` in your `build.gradle` is set to `32`
