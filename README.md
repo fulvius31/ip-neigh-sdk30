@@ -39,4 +39,4 @@ String arpTable = ArpNDK.getARP();
 
 # Important Note
 
-This library does not work - at the moment - if your `targetSdk` in your `build.gradle` is set to `32`
+This library actually works also if your `targetSdk` in your `build.gradle` is set to `32` and `minSdk` to '21'
