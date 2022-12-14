@@ -40,3 +40,8 @@ String arpTable = ArpNDK.getARP();
 # Important Note
 
 This library actually works also if your `targetSdk` in your `build.gradle` is set to `32` and `minSdk` to '21'
+
+## Apps Using this Library
+
+- https://play.google.com/store/apps/details?id=com.sangiorgisrl.wifimanagertool
+- https://play.google.com/store/apps/details?id=com.tester.wpswpatester
