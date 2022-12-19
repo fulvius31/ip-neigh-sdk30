@@ -136,6 +136,7 @@ int JNICALL Java_it_alessangiorgi_ipneigh30_ArpNDK_ARPFromJNI(JNIEnv *env, jclas
 
     if(do_route_dump_request(s) < 0){
         __android_log_write(ANDROID_LOG_ERROR, LOGTAG,  "socket send failed");
+        return -1;
     }else
         __android_log_write(ANDROID_LOG_ERROR, LOGTAG,  "socket send success");
 

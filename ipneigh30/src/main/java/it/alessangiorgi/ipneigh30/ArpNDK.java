@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 public class ArpNDK {
 
     private static final String TAG = "ArpNDK";
-    private static final String ARPNDK_FAILED = "Arp failed";
+    private static final String ARPNDK_FAILED = "Arp table reading failed, are you using targetSdk 32 and an Android 13 device?";
 
     static {
         System.loadLibrary("ipneigh-android");
