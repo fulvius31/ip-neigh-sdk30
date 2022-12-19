@@ -21,7 +21,7 @@ With this library, you can easily do that!
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.fulvius31:ip-neigh-sdk30:v0.0.2-alpha'
+  implementation 'com.github.fulvius31:ip-neigh-sdk30:v0.0.3alpha'
 }
 ```
 
