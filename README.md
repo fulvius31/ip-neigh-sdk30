@@ -18,7 +18,7 @@ With this library, you can easily do that!
 
 # How to import
 
-Step 1. Add the JitPack repository to your build file
+Step 1. Add the JitPack repository in your root `build.gradle` file at the end of repositories
 ```gradle
 allprojects {
   repositories {
