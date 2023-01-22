@@ -18,6 +18,17 @@ With this library, you can easily do that!
 
 # How to import
 
+Step 1. Add the JitPack repository in your root `build.gradle` file at the end of repositories
+```gradle
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+Step 2. Add the dependency
 ```gradle
 dependencies {
   ...
