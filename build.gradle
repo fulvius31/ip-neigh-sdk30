@@ -1,12 +1,13 @@
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
+  ...
+  implementation 'com.github.fulvius31:ip-neigh-sdk30:v0.0.3alpha'
     }
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://maven.google.com" }
-        maven { url "https://jitpack.io" }
+    allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
     }
 }
     task clean(type: Delete) {
